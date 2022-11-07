@@ -61,7 +61,7 @@ range[Symbol.iterator] = function() {
     };
 };
 
-range[Symbol.iterator]();
+
 // nтеперь ОБЫЧНЫЙ объект стал ИТЕРИРУЕМЫМ
 for(let num of range) {
     console.log(num);
