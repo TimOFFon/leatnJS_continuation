@@ -105,5 +105,128 @@ Bred = null;  // <--- Bred get out site
  * дальнейшие её вызовы на том же объекте могли просто 
  * брать уже готовый результат, повторно используя его.
  */
-// ПРИМЕР:
 
+
+
+// ПРИМЕР:------------------------------------
+
+// cache.js---------------------------
+let cache = new WeakMap();
+
+// вычисляем и запоминаем результат
+function process(obj) {
+    if(obj === null) return console.log('Кэш чист');
+
+    if(!cache.has(obj)) {
+        // вычисляем результат для объекта
+        function result(obj) {
+            return obj.count * obj.price;
+        }
+
+        cache.set(obj, result(obj));
+    }
+
+    return cache.get(obj);
+}
+//-------------------------------------
+
+// main.js----------------------------
+// какой то объект
+//before--------------
+let somethingObj = {
+    count: 5,
+    price: 10
+};
+//after----------------
+//...позже когда объект больше не нужен
+somethingObj = null;
+
+// let resultAnother1 = process(somethingObj);
+//before 50
+//after Кэш чист
+
+// let resultAnother2 = process(somethingObj);
+//before 50
+//after Кэш чист
+
+
+
+
+
+
+//=====================================================
+
+//                      WeakSet
+
+//=====================================================
+
+/**
+ *       WeakSet - аналогична Set, 
+ * 
+ *                 НО, можем добавлять ТОЛЬКО ОБЪЕКТЫ.
+ * 
+ *                 Объект присутствует в множестве,
+ *                 пока доступен где-то ещё.              
+ * 
+ * 
+ *       Данные - должны быть ОБЪЕКТАМИ.
+ */
+
+
+//--------------------------------------------------
+/**-----------------------------------------------------
+ * 
+ *                    МЕТОДЫ WeakSet
+ * 
+ *                   WeakSet.add(Object)
+ *                   WeakSet.has(Object)
+ *                   WeakSet.delete(Object)
+ *                   
+ * 
+ *                   НЕ ПОДДЕРЖИВАЕТ
+ *                   
+ *                         size()
+ *                         keys()
+ *                         values()
+ *                         entries()
+ * -----------------------------------------------------
+ */
+
+/**
+ *           Служит для значений типа <<ДА/НЕТ>>
+ */
+
+//---------------------------------------------------
+//  НАПРИМЕР: (для учёта кто посещал сайт)
+
+let visitedSet = new WeakSet();
+
+let john = {name: 'John'};
+let pete = {name: 'Pete'};
+let mary = {name: 'Mary'};
+
+visitedSet.add(john);// John заходил
+visitedSet.add(pete);// потом Pete
+visitedSet.add(john);// снова John
+
+// проверим, заходил ли сегодня John?
+// console.log(visitedSet.has(john)); // true
+
+// проверим, заходил ли сегодня Pete?
+// console.log(visitedSet.has(pete)); // true
+
+// проверим, заходила ли сегодня Mary?
+// console.log(visitedSet.has(mary)); // false
+
+
+//---- Конец суток, отчистка кэша-------
+john = null;
+pete = null;
+mary = null;
+
+// проверим, заходил ли сегодня John?
+// console.log(visitedSet.has(john)); // false
+// проверим, заходил ли сегодня Pete?
+// console.log(visitedSet.has(pete)); // false
+// проверим, заходила ли сегодня Mary?
+// console.log(visitedSet.has(mary)); // false
