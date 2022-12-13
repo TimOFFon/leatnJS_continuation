@@ -253,9 +253,7 @@ function aclean2(arr) {
 
 
 
-//====================================================
-//====================================================
-//====================================================
+c
 
 
 
@@ -305,8 +303,7 @@ function aclean2(arr) {
 
 // Решение: 
 /**
- *  Используем структуру данных weakMap, модифицировав массив
- *  объектов, и добавив объектам свойство о статусе прочитанности.
+ *  Используем структуру данных WeakMap.
  */
 
 let messages = [
@@ -314,9 +311,68 @@ let messages = [
                    {text: "How goes?", from: "John"},
                    {text: "See you soon", from: "Alice"}];
 
-function objectHandler(arr) {
-    let set = new Set();
-    for(let obj of arr) {
-        
+
+
+
+                   let weakObj = new WeakMap();
+
+function readMessageStatus(arrItems, status = false) {
+    if(arrItems.length > 0 && !status) {
+        for(let obj of arrItems) {
+            weakObj.set(obj, status);
+        }
+    } else {
+        if(weakObj.has(arrItems)) weakObj.delete(arrItems);
+        weakObj.set(arrItems, status);
     }
+
+    return console.log(weakObj.get(arrItems), weakObj);
 }
+
+let read = true;
+//-----------------------------------------------------------
+
+// readMessageStatus(messages); 
+//  WeakMap {{…} => false, {…} => false, {…} => false}
+
+
+// readMessageStatus(messages[0], read); 
+// true WeakMap {{…} => true, {…} => false, {…} => false}
+
+// console.log(weakObj);
+// WeakMap{{…} => true, {…} => false, {…} => false}
+
+
+
+//------------------------  60 min  ------------------------
+
+
+
+// Решение из учебника
+
+let readMessages = new WeakSet();
+
+// Два сообщения были прочитаны
+readMessages.add(messages[0]);
+readMessages.add(messages[1]);
+// readMessages содержит 2 элемента
+
+// ...давайте снова прочитаем первое сообщение!
+readMessages.add(messages[0]);
+// readMessages до сих пор содержит 2 элемента
+
+// Вопрос: было ли сообщение message[0] прочитано?
+// console.log("Read message 0: " + readMessages.has(messages[0]));
+// Read message 0: true
+
+// messages.shift();
+// теперь readMessages содержит 1 элемент 
+//(хотя технически память может быть очищена позже)
+
+
+
+
+
+//====================================================
+//====================================================
+//====================================================
