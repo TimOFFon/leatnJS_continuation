@@ -459,12 +459,54 @@ let messages2_2 = [
   let whenWasReading = new WeakMap();
 
   //прочитано
-  console.log(whenWasReading.set(messages2_2, 'time1'));
+//   console.log(whenWasReading.set(messages2_2, 'time1'));
 
   //проверяем воемя - time1
-  console.log(whenWasReading.get(messages2_2));
+//   console.log(whenWasReading.get(messages2_2));
 
 
 //====================================================
 //====================================================
 //====================================================
+// 1/2 (Сумма свойств объекта)
+// 10.01.23
+
+let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+
+  let emptyObj = {};
+
+  function sumSalaries(obj) {
+    let sum = null;
+    if(!Object.keys(obj).length) {
+        return 0;
+    } else {
+        for (let i of Object.values(obj)) {
+            sum += i;
+        }
+    }
+    return sum;
+  }
+
+//   console.log(sumSalaries(salaries)); // 650
+//   console.log(sumSalaries(emptyObj)); // 0
+
+//====================================================
+//====================================================
+//====================================================
+// 2/2 (Подсчёт количества свойств объекта)
+// 10.01.23
+
+let user = {
+    name: 'John',
+    age: 30
+  };
+
+  function count(obj) {
+    return Object.values(obj).length;
+  }
+
+//   console.log(count(user)); // 2
