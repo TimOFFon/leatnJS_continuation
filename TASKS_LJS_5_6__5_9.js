@@ -423,6 +423,47 @@ readMessages.add(messages[0]);
 
 
 
+//====================================================
+//====================================================
+//====================================================
+//------------- Закрепеление материала ---------------
+// 1/2 (Хранение отметок "не прочитано")
+// 10.01.23
+
+let messages2 = [
+    {text: "Hello", from: "John"},
+    {text: "How goes?", from: "John"},
+    {text: "See you soon", from: "Alice"}
+  ];
+
+  let wasReading = new WeakSet();
+
+//   console.log(wasReading.add(messages2[0])); // прочитатно
+//   console.log(wasReading.has(messages2[0])); // проверяем
+  
+  
+  messages2.shift(); // объект удалется
+//   console.log(wasReading.has(messages2[0])); // проверяем
+
+//====================================================
+//====================================================
+//====================================================
+// 2/2 (Хранение времени прочтения)
+// 10.01.23
+let messages2_2 = [
+    { text: "Hello", from: "John" },
+    { text: "How goes?", from: "John" },
+    { text: "See you soon", from: "Alice" }
+  ];
+
+  let whenWasReading = new WeakMap();
+
+  //прочитано
+  console.log(whenWasReading.set(messages2_2, 'time1'));
+
+  //проверяем воемя - time1
+  console.log(whenWasReading.get(messages2_2));
+
 
 //====================================================
 //====================================================
