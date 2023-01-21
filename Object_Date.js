@@ -219,3 +219,88 @@ let utcSpredTimeMinusOne = utcDateMinusOne.getTimezoneOffset() + 240; // UTC -1
 // 60 * 4 = 240
 // console.log(utcSpredTimeMinusOne); // 60 (разница +60 до UTC)
 //----------------------------------------------------------'
+
+
+
+
+//======================================================
+
+//         **** УСТАНОВКА КОМПОНЕНТОВ ДАТЫ *****
+
+//======================================================
+/**
+ *            setFullYear(year, [month], [date])
+ *            setUTC
+ * 
+ *            setMonth(month, [date])
+ *            setUTC
+ * 
+ *            setdate(date)
+ *            setUTC
+ * 
+ *            setMinutes(min, [sek], [ms])
+ *            setUTC
+ * 
+ *            setSeconds(sec, [ms])
+ *            setUTC
+ * 
+ *            setMilliseconds(ms)
+ *            setUTC
+ * 
+ *            setTime(milliseconds) дата в миллисекундах
+ *                                  с 01.01.1970 UTC
+ */
+
+
+
+
+
+//======================================================
+
+//            **** АВТОИСПРАВЛЕНИЕ ДАТЫ *****
+
+//======================================================
+/**
+ * 
+ *           Автоисправление - даты вне обычного 
+ *                             диапазона значений
+ *                             исправляются оъектом.
+ *                             
+ */
+// Распределение лишних дней
+//--------------------------------------------------,
+let overloadDate = new Date(2023, 0, 35);
+// console.log(overloadDate); // Sat Feb 04 2023
+
+let overloadDate2 = new Date(2023, 1, 28);
+overloadDate2.setDate(overloadDate2.getDate() + 2);
+// console.log(overloadDate2); // Thu Mar 02 2023
+//-------------------------------------------------------'
+
+
+
+//-------------------------------------------------------,
+// Механизм "автоиправления" используется для получения
+// дат после заданых отрезков времени
+let setTimePeriod = new Date();
+let startPeriod = setTimePeriod.getSeconds();
+
+setTimePeriod.setSeconds(setTimePeriod.getSeconds() + 5);
+
+let finishPeriod = setTimePeriod.getSeconds();
+
+// console.log(`СТАРТ: ${startPeriod}, КОНЕЦ ТАЙМЕРА: ${finishPeriod}`);
+// СТАРТ: 11, КОНЕЦ ТАЙМЕРА: 16
+//---------------------------------------------------------'
+
+
+//----------------------------------------------------------,
+// нулевые и отрицательные значения
+let lateDay = new Date(2023, 0, 2); // 2 Jan
+
+lateDay.setDate(1); // задаём позднее число
+// console.log(lateDay); // Sun Jan 01 2023
+
+lateDay.setDate(0); // отрицательное значение для Jan
+// console.log(lateDay); // Sat Dec 31 2022 (автоисправление)
+//----------------------------------------------------------'
