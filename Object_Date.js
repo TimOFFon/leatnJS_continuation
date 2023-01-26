@@ -413,7 +413,76 @@ thereChangeComp.setHours(23, 23, 23, 333);
 
 // ПРИМЕРЫ МЕТОДОВ TO
 //--------------------------------------------------------,
+let exampleDate = new Date();
 
+
+// console.log(exampleDate.toDateString());
+// Thu Jan 26 2023
+
+
+
+// console.log(exampleDate.toISOString());
+// 2023-01-26T10:44:23.041Z
+
+
+
+// console.log(exampleDate.toJSON());
+// 2023-01-26T10:46:03.435Z
+
+
+
+// console.log(exampleDate.toLocaleDateString('Ru'));
+// 26.01.2023
+
+
+
+// console.log(exampleDate.toLocaleString());
+// 26.01.2023, 13:49:30
+
+// console.log(exampleDate.toLocaleString("en-US"));
+//1/26/2023, 1:51:10 PM
+
+
+
+// console.log(exampleDate.toLocaleTimeString());
+// 13:52:18
+
+// console.log(exampleDate.toLocaleTimeString('en-US'));
+// 1:53:08 PM
+
+
+
+// console.log(exampleDate.toString());
+//Thu Jan 26 2023 13:54:57 GMT+0300 (Москва, стандартное
+//время)
+
+
+
+// console.log(exampleDate.toTimeString());
+//13:56:20 GMT+0300 (Москва, стандартное время)
+
+
+
+// console.log(exampleDate.toUTCString());
+// Thu, 26 Jan 2023 10:57:50 GMT
+
+
+let exampleUTC_1 = new Date(Date.UTC(
+    exampleDate.getFullYear(), 
+    exampleDate.getMonth(), 
+    exampleDate.getDate(), 
+    exampleDate.getHours() - 3, 
+    exampleDate.getMinutes(),
+    exampleDate.getSeconds(),
+    exampleDate.getMilliseconds()));
+// console.log(exampleUTC_1.toISOString());
+//2023-01-26T11:27:20.013Z
+
+
+
+let toPrimitiveDate = new Date();
+// console.log(toPrimitiveDate.valueOf());
+// 1674732603629 (число)
 //--------------------------------------------------------'
 
 
@@ -727,4 +796,59 @@ for (let i = 0; i < 10; i++) {
 // Итоговое время diffSubtract: 310 //  было 317
 // Итоговое время diffGetTime: 23 //  было 27
 
+//--------------------------------------------------------'
+
+
+
+
+
+
+//======================================================
+
+//                 **** DATE PARSE *****
+
+//======================================================
+
+/**
+ *        Date.parse(str) -    считывает дату из строки.
+ *                             возвращает таймстамп UTC
+ *             NaN -           если формат неправильный 
+ *  
+ *             ------------ ФОРМАТ------------
+ * 
+ *                 YYYY-MM-DDTHH:mm:ss.sssZ
+ * 
+ * 
+ *       YYYY-MM-DD –        год-месяц-день
+ *    
+ *       T -                 разделитель
+ * 
+ *       HH:mm:ss.sss –     часы, минуты, секунды
+ *                                 и миллисекунды   
+ * 
+ *       Z -               часовой пояс в формате 
+ *                                        +-hh:mm
+ * 
+ *         Если указать просто букву Z, то получим UTC+0
+ * 
+ * ---------------------------------------------------------,
+ *      Возможны короткие варианты:   YYYY-MM-DD 
+ *                                    YYYY-MM 
+ *                                    YYYY
+ * ---------------------------------------------------------'
+ */
+
+
+
+// ПРИМЕР
+//--------------------------------------------------------,
+let ms = Date.parse('2023-01-26T16:00:00.000+03:00');
+// console.log(ms); // 1674738000000
+
+let showDate = new Date(ms);
+// console.log(showDate);
+/**
+ * Thu Jan 26 2023 16:00:00 GMT+0300 (Москва, стандартное
+ * время)
+ */
 //--------------------------------------------------------'
