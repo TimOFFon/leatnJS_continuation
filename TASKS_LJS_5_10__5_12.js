@@ -393,6 +393,50 @@ alert( formatDate(new Date(new Date - 86400 * 1000)) );
 
 //Решение
 //-------------------------------------------------------
+/*
+1) нужно понять сколько прошло с старт-поинта
+   а. вычесть из стоп-поинта вычесть старт поинт
+   b. создать эталон старта
+   c. из аргумента вчесть эталон
+2) сравнить с условиями
+   а. создать условия с 3 выражениями и 3 return
+   в. сравнение с сек/мин/час
+ */
 function formatDate(date) {
-  
+  //1-b
+  let reference = new Date();
+
+  //1-c
+  let compare = reference - date;
+
+  //2-a-b
+  if(compare < 1000) {
+    return console.log('прямо сейчас');
+  } 
+    else if(compare > 1000 && compare < 60000) {
+    let n = Math.round(compare / 1000);
+    return console.log(`${n} сек. назад`)
+  } 
+    else if(compare > 60000 && compare < 3600 * 1000) {
+    let m = Math.round(compare / 60000);
+    return console.log(`${m} мин. назад`);
+  } 
+    else {
+    return console.log(`${date.toLocaleDateString('Ru')}` 
+                        + ` ` +
+                       `${date.getHours()}` + `:` +
+                       `${date.getMinutes()}`);
+  }
 }
+
+formatDate(new Date(new Date - 1)); 
+// прямо сейчас
+
+formatDate(new Date(new Date - 30 * 1000)); 
+// 30 сек. назад
+
+formatDate(new Date(new Date - 5 * 60 * 1000)); 
+// 5 мин. назад
+
+formatDate(new Date(new Date - 86400 * 1000));
+// 26.01.2023 14:33 (вчерашняя дата)
