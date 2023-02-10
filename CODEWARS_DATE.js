@@ -765,7 +765,8 @@ Angular предоставляет фильтр для правильного о
 **ss** : Second in minute, padded (00-59)
 **s** : Second in minute (0-59)
 
-Функция dateFilter должна принимать два аргумента: date, format.
+Функция dateFilter должна принимать два аргумента: date, 
+format.
 
 date - может быть объектом Date, числом или 
 строкой (конвертируемой в число)
